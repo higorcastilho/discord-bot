@@ -55,7 +55,7 @@ bot.on('message', msg => {
               payment_method:'paypal'
             },
             redirect_urls:{
-              return_url:'https://discord-bot-157.herokuapp.com/process',
+              return_url:'/process',
               cancel_url:'/cancel'
             },
             transactions:[{
