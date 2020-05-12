@@ -8,15 +8,15 @@ const path = require('path')
 
 paypal.configure({
     'mode': 'sandbox', //sandbox or live
-    'client_id': 'AV155ElLCzbo5k4OvGNm5vczYS0S3l_lP_ZHwpiG7UBWsvosUJYvfycQNUHu_ExoZ8CtnqoDvcjvb3s4',
-    'client_secret': 'EFHlI5_--z4LX0RbE-ksAdyF6PN-F1K_zx6DORwuIXWFGMpN7-Vlzkt3-otLoph4JQ6yJWMO3hcC4zOf'
+    'client_id': //your client id goes here,
+    'client_secret': //your client secret goes here
 });
 
 const bot = new Discord.Client()
-const token = 'NzA5NDM0OTYxNjM5NTA2MDAw.XrmJNQ.GxvOqcXZN2hL6QKLZBjHgZJohiw'
+const token = //here goes your token from discord bot account
 bot.login(token)
 bot.on('ready', () => {
-    console.log('Estou pronto')
+    console.log('Im ready to send messages for you')
 })
 
 app.set('view engine', 'ejs')
@@ -33,22 +33,21 @@ app.get('/process', (req, res) => {
 
     paypal.payment.execute(paymentId, payerId, function(error, payment){
         if(error) {
-            console.log('tente pagar novamente')
+            console.log('Try to pay again')
             console.log(error)
         } else {
             if (payment.state == 'approved') {
-                console.log('Olha ... deu bom mesmo agora')
+                console.log('Payment aproved')
                 res.render('process')
             } else {
-                console.log('deu ruim ai, deu pra finalizar nao')
+                console.log('Something went wrong. Payment not approved')
             }
         }
     })
 })
 
-//if it's real
 bot.on('message', msg => {
-    if (msg.content === "buy") {
+    if (msg.content === "!buy") {
 
         const payReq = {
             intent:'sale',
@@ -56,15 +55,16 @@ bot.on('message', msg => {
               payment_method:'paypal'
             },
             redirect_urls:{
-              return_url:'https://discord-bot-157.herokuapp.com/process',
-              cancel_url:'/cancel'
+            //if you're testing, change return and cancel_url by http://localhost:3000/process ou /cancel
+              return_url:'your_heroku_url_goes_here/process',
+              cancel_url:'your_heroku_url_goes_here/cancel'
             },
             transactions:[{
               amount:{
-                total:'25',
-                currency:'BRL'
+                total:'the value you want to put goes here. e.g: 20',
+                currency:'USD'
               },
-              description:' Box.'
+              description:' Your Product name goes here'
             }]
         }
         paypal.payment.create(payReq, function(error, payment){
@@ -83,96 +83,13 @@ bot.on('message', msg => {
                 if (links.hasOwnProperty('approval_url')) {
                     msg.reply(links['approval_url'].href)
                 } else {
-                    console.log('deu ruim')
+                    console.log('Something went wrong after paypal.create payment')
                 }
             }
         })
     }
 })
 
-//if i'm testing on localhost return url changes
-/* bot.on('message', msg => {
-    if (msg.content === "buy") {
-
-        const payReq = {
-            intent:'sale',
-            payer:{
-              payment_method:'paypal'
-            },
-            redirect_urls:{
-              return_url:'https://localhost:3000/process',
-              cancel_url:'https://localhost:3000/cancel'
-            },
-            transactions:[{
-              amount:{
-                total:'25',
-                currency:'BRL'
-              },
-              description:' Box.'
-            }]
-        }
-        paypal.payment.create(payReq, function(error, payment){
-            let links = {}
-    
-            if (error) {
-                console.error(JSON.stringify(error))
-                msg.reply('Something went wrong when trying to sent paypal link checkout')
-            } else {
-                payment.links.forEach(linkObj => {
-                    links[linkObj.rel] = {
-                        href: linkObj.href,
-                        method: linkObj.method
-                    }
-                })
-                if (links.hasOwnProperty('approval_url')) {
-                    msg.reply(links['approval_url'].href)
-                } else {
-                    console.log('deu ruim')
-                }
-            }
-        })
-    }
-}) */
-
-/* app.post('/pay', (req, res) => {
-    const payReq = {
-        intent:'sale',
-        payer:{
-          payment_method:'paypal'
-        },
-        redirect_urls:{
-          return_url:'http://localhost:3000/process',
-          cancel_url:'http://localhost:3000/cancel'
-        },
-        transactions:[{
-          amount:{
-            total:'25',
-            currency:'BRL'
-          },
-          description:' Box.'
-        }]
-    }
-    paypal.payment.create(payReq, function(error, payment){
-        let links = {}
-
-        if (error) {
-            console.error(JSON.stringify(error))
-        } else {
-            payment.links.forEach(linkObj => {
-                links[linkObj.rel] = {
-                    href: linkObj.href,
-                    method: linkObj.method
-                }
-            })
-            if (links.hasOwnProperty('approval_url')) {
-                res.redirect(links['approval_url'].href)
-
-            } else {
-                console.log('deu ruim')
-            }
-        }
-    })
-}) */
 const port = process.env.PORT || 3000
 app.listen(port, () => {
     console.log('Connected to server')
