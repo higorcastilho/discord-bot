@@ -2,6 +2,7 @@
 
 How to run this code: 
 - Download the zip
+- Add your Paypal API and Discord Bot credentials inside the index.js file
 - cd to the downloaded folder
 - Run 'npm install'
 - Run 'npm start'
