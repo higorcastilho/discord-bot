@@ -18,7 +18,9 @@ bot.login(token)
 bot.on('ready', () => {
     console.log('Im ready to send messages for you')
 })
-
+//After that, your bot will basically act on two lines of this entire code
+//At line started with 'bot.on('message', msg => {})' and line 'msg.reply'
+//All the other lines are the configurations of paypal API.
 app.set('view engine', 'ejs')
 
 app.use('/', serveStatic(path.join(__dirname, '/views')))
@@ -46,6 +48,8 @@ app.get('/process', (req, res) => {
     })
 })
 
+//Here, you're using your bot to answer to an especific message (!buy, in this case) sent by a member of your group. 
+//if message === '!buy', your bot starts the paypal configuration to your product, as you can see below:
 bot.on('message', msg => {
     if (msg.content === "!buy") {
 
@@ -55,9 +59,14 @@ bot.on('message', msg => {
               payment_method:'paypal'
             },
             redirect_urls:{
-            //if you're testing, change return and cancel_url by http://localhost:3000/process ou /cancel
-              return_url:'your_heroku_url_goes_here/process',
-              cancel_url:'your_heroku_url_goes_here/cancel'
+            //if you're testing, change return and cancel_url to http://localhost:3000/process ou /cancel
+            //The /process url is created because when the checkout step is confirmed by the user(member of your group)
+            //it's redirected to this page. On our example, you can see this page on /views/process.ejs which says
+            //"Thanks for your purchase"
+            //In addition, this route(/process), is used by paypal API to check the confirmation sent by the user,
+            //as you can see above on app.get(/process) 
+              return_url:'your_website_url_goes_here/process',
+              cancel_url:'your_website_url_goes_here/cancel'
             },
             transactions:[{
               amount:{
@@ -81,6 +90,8 @@ bot.on('message', msg => {
                     }
                 })
                 if (links.hasOwnProperty('approval_url')) {
+                    //if a link is successfuly created, your bot is triggered by the command 'msg.reply' to send this link
+                    //to your member. Now, your member can click on the link to go to a checkout page. 
                     msg.reply(links['approval_url'].href)
                 } else {
                     console.log('Something went wrong after paypal.create payment')
