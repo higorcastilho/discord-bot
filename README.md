@@ -6,4 +6,4 @@ How to run this code:
 - Run 'npm install'
 - Run 'npm start'
 ------------------------------------------------------------
-There are some commented lines to explain some pieces of the code.
+There are some commented lines on index.js to explain some pieces of the code.
