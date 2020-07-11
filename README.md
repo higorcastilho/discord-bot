@@ -1,4 +1,4 @@
-# discord-bot: Make your discord bot to answer a message sent on your group with a link of a product you want to sell
+# Discord-bot: Make your discord bot to answer a message sent on your group with a link of a product you want to sell
 
 How to run this code: 
 - Download the zip
