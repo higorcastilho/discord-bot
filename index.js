@@ -59,7 +59,7 @@ bot.on('message', msg => {
               payment_method:'paypal'
             },
             redirect_urls:{
-            //if you're testing, change return and cancel_url to http://localhost:3000/process ou /cancel
+            //if you're testing, change return and cancel_url to http://localhost:3000/process or /cancel
             //The /process url is created because when the checkout step is confirmed by the user(member of your group)
             //it's redirected to this page. On our example, you can see this page on /views/process.ejs which says
             //"Thanks for your purchase"
