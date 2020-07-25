@@ -2,6 +2,8 @@
 
 https://media1.giphy.com/media/RlwexIl93DY83TP4ZA/giphy.gif
 
+![Alt Text](https://media1.giphy.com/media/RlwexIl93DY83TP4ZA/giphy.gif)
+
 How to run this code: 
 - Download the zip or clone it
 - Add your Paypal API and Discord Bot credentials inside the index.js file
