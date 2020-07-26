@@ -20,7 +20,7 @@ bot.on('ready', () => {
 })
 //After that, your bot will basically act on two lines of this entire code
 //At line started with 'bot.on('message', msg => {})' and line 'msg.reply'
-//All the other lines are the configurations of paypal API.
+//All the other lines are the paypal API configurations.
 app.set('view engine', 'ejs')
 
 app.use('/', serveStatic(path.join(__dirname, '/views')))
