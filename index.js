@@ -61,7 +61,7 @@ bot.on('message', msg => {
             redirect_urls:{
             //if you're testing, change return and cancel_url to http://localhost:3000/process and /cancel
             //The /process url is created because when the checkout step is confirmed by the user(member of your group)
-            //it's redirected to this page. On our example, you can see this page on /views/process.ejs which says
+            //it's redirected to this page. In our example, you can see this page on /views/process.ejs which says
             //"Thanks for your purchase"
             //In addition, this route(/process), is used by paypal API to check the confirmation sent by the user,
             //as you can see above on app.get(/process) 
