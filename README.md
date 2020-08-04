@@ -1,5 +1,5 @@
 # Discord-bot: Make your discord bot to answer a message sent on your group with a link of a product you want to sell
-:robot:
+# :robot:
 ![Alt Text](https://media1.giphy.com/media/RlwexIl93DY83TP4ZA/giphy.gif)
 
 ## How to run this code: 
