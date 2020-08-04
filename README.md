@@ -9,5 +9,5 @@
 - Run 'npm install'
 - Run 'npm start'
 ------------------------------------------------------------
-#### There are some commented lines on index.js to explain some pieces of the code.
-#### :shipit: This was a little snippet I sold to a costumer from US that wanted his discord bot to help him with sales.
+There are some commented lines on index.js to explain some pieces of the code. <br/>
+:shipit: This was a little snippet I sold to a costumer from US that wanted his discord bot to help him with sales.
